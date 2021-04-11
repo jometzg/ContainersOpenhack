@@ -3,6 +3,8 @@ import logging
 import azure.functions as func
 import json
 import requests
+import uuid
+import time
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -11,10 +13,34 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     id = req_body["id"]
     userid = req_body["userId"]
     productid = req_body["productId"]
+    rating = req_body["rating"]
+
+    # check that the productid is valid
+    headers = {'Content-type': 'application/json'}
+    res_prod = requests.get(f"https://serverlessohproduct.trafficmanager.net/api/GetProduct?productid={productid}", headers=headers)
+    if res_prod.status_code != 200:
+        return func.HttpResponse(f"Invalid productid", status_code=400)
     
-    res = requests.get(f"serverlessohproduct.trafficmanager.net/api/GetProduct?productid={productid}")
-    #conn = http.client.HTTPSConnection("serverlessohproduct.trafficmanager.net")
-    #resp = conn.request("GET", f"/api/GetProduct?productid={productid}")
-    
-    return func.HttpResponse(f"Hello, from {productid} got id: {res}")
-    
+    # check that the userid is valid
+    headers = {'Content-type': 'application/json'}
+    res_user = requests.get(f"https://serverlessohuser.trafficmanager.net/api/GetUser?userId={userid}", headers=headers)
+    if res_user.status_code != 200:
+        return func.HttpResponse(f"Invalid userid", status_code=400)
+
+    # check rating in range
+    if rating < 0 or rating > 5: 
+        return func.HttpResponse(f"Invalid rating", status_code=400)
+
+    # build output object
+    data = {
+        "id": str(uuid.uuid4()),
+        "userId" : userid,
+        "ProductId" : productid,
+        "timestamp": time.time(),
+        "locationName": req_body["locationName"],  
+        "Rating" : rating,
+        "UserNotes" : req_body["userNotes"],
+    }
+
+    # return
+    return func.HttpResponse(json.dumps(data))
