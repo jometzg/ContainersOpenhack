@@ -5,7 +5,7 @@ import json
 
 def main(req: func.HttpRequest, rating: func.DocumentList) -> str:
     logging.info('Python HTTP trigger function processed a request.')
-    logging.info(req.params["userId"])
+    logging.info(req.params["ratingId"])
     if not rating:
         logging.warning("rating item not found")
         return func.HttpResponse(f"Not foound", status_code=404)

@@ -22,7 +22,7 @@
       "databaseName": "RatingDatabase",
       "collectionName": "RatingCollection",
       "connectionStringSetting": "jjratingsaccount_DOCUMENTDB",
-      "userId": "{Query.userId}",
+      "Rating": "{Query.ratingId}",
       "PartitionKey": "{Query.partitionKeyValue}"
     }
   ]

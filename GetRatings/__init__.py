@@ -1,18 +1,28 @@
 import logging
 
 import azure.functions as func
+import json
 
-
-def main(req: func.HttpRequest) -> func.HttpResponse:
+def main(req: func.HttpRequest, rating:func.DocumentList) -> func.HttpResponse:
+    
     logging.info('Python HTTP trigger function processed a request.')
-
-    userid = req.params.get('userId')
  
+    ratings_json = []
 
-    if userid:
-        return func.HttpResponse(f"Hello, {userid}. This HTTP triggered function executed successfully.")
-    else:
-        return func.HttpResponse(
-             "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
-             status_code=200
-        )
+    for rate in rating:
+        data = {
+            "id": rate["id"],
+            "userId" : rate["userId"],
+            "ProductId" : rate["ProductId"],
+            "timestamp": rate["timestamp"],
+            "locationName": rate["locationName"],  
+            "Rating" : rate["Rating"],
+            "UserNotes" : rate["UserNotes"],
+        }
+        ratings_json.append(data)
+
+    return func.HttpResponse(
+            json.dumps(ratings_json),
+            status_code=200,
+            mimetype="application/json"            
+    )
