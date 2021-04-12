@@ -8,7 +8,6 @@ Content-Type: application/json
 }
 
 ### Create Request
-
 POST http://localhost:7071/api/CreateRating
 Content-Type: application/json
 
@@ -21,6 +20,16 @@ Content-Type: application/json
   "rating": 5,
   "userNotes": "I love the subtle notes of orange in this ice cream!"
 }
+
+### Get Request (userid)
+GET http://localhost:7071/api/GetRating?userId=cc20a6fb-a91f-4192-874d-132493685376
+Content-Type: application/json
+
+
+### Get Request (user and partition key)
+GET http://localhost:7071/api/GetRating?userId=cc20a6fb-a91f-4192-874d-132493685376&partitionKeyValue=1e51f6d9-3ea7-46ea-8d9f-acc0c2b2a9ea
+Content-Type: application/json
+
 
 ### call get product
 GET https://serverlessohproduct.trafficmanager.net/api/GetProduct?productid=4c25613a-a3c2-4ef3-8e02-9c335eb23204

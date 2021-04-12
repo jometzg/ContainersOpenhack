@@ -7,14 +7,23 @@
       "direction": "in",
       "name": "req",
       "methods": [
-        "get",
-        "post"
+        "get"
       ]
     },
     {
       "type": "http",
       "direction": "out",
       "name": "$return"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "rating",
+      "databaseName": "RatingDatabase",
+      "collectionName": "RatingCollection",
+      "connectionStringSetting": "jjratingsaccount_DOCUMENTDB",
+      "userId": "{Query.userId}",
+      "PartitionKey": "{Query.partitionKeyValue}"
     }
   ]
 }
