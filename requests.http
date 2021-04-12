@@ -33,6 +33,22 @@ Content-Type: application/json
 GET http://localhost:7071/api/GetRatings/cc20a6fb-a91f-4192-874d-132493685376
 Content-Type: application/json
 
+### challenge three, deployed functions
+
+### Get Ratings by rating (rating and partition key)
+GET https://jjopenhackchallengeone.azurewebsites.net/api/GetRating?ratingId=5&partitionKeyValue=1e51f6d9-3ea7-46ea-8d9f-acc0c2b2a9ea
+Content-Type: application/json
+
+### Get Ratings by user
+GET https://jjopenhackchallengeone.azurewebsites.net/api/GetRatings?userid=cc20a6fb-a91f-4192-874d-132493685376
+Content-Type: application/json
+
+### Get Ratings by user - path routing - needs   "route": "GetRatings/{userid}",
+GET https://jjopenhackchallengeone.azurewebsites.net/api/GetRatings/cc20a6fb-a91f-4192-874d-132493685376
+Content-Type: application/json
+
+
+
 
 ### DEPENDENCIES call get product
 GET https://serverlessohproduct.trafficmanager.net/api/GetProduct?productid=4c25613a-a3c2-4ef3-8e02-9c335eb23204
