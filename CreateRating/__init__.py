@@ -6,7 +6,7 @@ import requests
 import uuid
 import time
 
-def main(req: func.HttpRequest) -> func.HttpResponse:
+def main(req: func.HttpRequest, outputDocument: func.Out[str]) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
   
     req_body = req.get_json()
@@ -41,6 +41,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         "Rating" : rating,
         "UserNotes" : req_body["userNotes"],
     }
+
+    # save to Cosmos
+    outputDocument.set(json.dumps(data))
 
     # return
     return func.HttpResponse(json.dumps(data))

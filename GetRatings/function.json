@@ -7,6 +7,7 @@
       "direction": "in",
       "name": "req",
       "methods": [
+        "get",
         "post"
       ]
     },
@@ -14,15 +15,6 @@
       "type": "http",
       "direction": "out",
       "name": "$return"
-    },
-    {
-      "type": "cosmosDB",
-      "direction": "out",
-      "name": "outputDocument",
-      "databaseName": "RatingDatabase",
-      "collectionName": "RatingCollection",
-      "createIfNotExists": "true",
-      "connectionStringSetting": "jjratingsaccount_DOCUMENTDB"
     }
   ]
 }
