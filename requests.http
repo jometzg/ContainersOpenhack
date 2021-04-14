@@ -48,14 +48,50 @@ GET https://jjopenhackchallengeone.azurewebsites.net/api/GetRatings/cc20a6fb-a91
 Content-Type: application/json
 
 
+### APIM fronted web services
+@endpoint = https://jjchallengefour.azure-api.net
+@key = XXXX
 
+### GetRatings - by userid
+GET {{endpoint}}/rating/getratings?userid=cc20a6fb-a91f-4192-874d-132493685376
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: {{key}}
+Ocp-Apim-Trace: true
 
+### GetRating by ratingId
+GET {{endpoint}}/rating/GetRating?ratingId=5&partitionKeyValue=1e51f6d9-3ea7-46ea-8d9f-acc0c2b2a9ea
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: {{key}}
+Ocp-Apim-Trace: true
+
+### GetProducts
+GET {{endpoint}}/product/GetProducts
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: {{key}}
+Ocp-Apim-Trace: true
+
+### GetProduct
+GET {{endpoint}}/product/GetProduct?productId=4c25613a-a3c2-4ef3-8e02-9c335eb23204
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: {{key}}
+Ocp-Apim-Trace: true
+
+### GetUser by userId
+GET {{endpoint}}/user/GetUser?userId=cc20a6fb-a91f-4192-874d-132493685376
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: {{key}}
+Ocp-Apim-Trace: true
+
+### pre-existing base APIs
 ### DEPENDENCIES call get product
 GET https://serverlessohproduct.trafficmanager.net/api/GetProduct?productid=4c25613a-a3c2-4ef3-8e02-9c335eb23204
 Content-Type: application/json
 
-
+### getproducts
+GET https://serverlessohproduct.trafficmanager.net/api/GetProducts
+Content-Type: application/json
 
 ### call get user
 GET https://serverlessohuser.trafficmanager.net/api/GetUser?userid=cc20a6fb-a91f-4192-874d-132493685376
 Content-Type: application/json
+
